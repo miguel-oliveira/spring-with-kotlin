@@ -16,8 +16,16 @@ class ThreadScopeAttributes {
     destructionCallbacks = LinkedHashMap(threadScopeAttributes.destructionCallbacks)
   }
 
-  internal fun getBeanMap(): MutableMap<String, Any> {
-    return beanMap
+  internal fun getBean(name: String): Any? {
+    return beanMap[name]
+  }
+
+  internal fun putBean(name: String, bean: Any) {
+    beanMap[name] = bean
+  }
+
+  internal fun removeBean(name: String): Any? {
+    return beanMap.remove(name)
   }
 
   internal fun registerRequestDestructionCallback(name: String, callback: Runnable) {
@@ -36,7 +44,7 @@ class ThreadScopeAttributes {
         name,
         Thread.currentThread().name
       )
-      destructionCallbacks[name]?.run()
+      destructionCallbacks[name]!!.run()
     }
 
     destructionCallbacks.clear()

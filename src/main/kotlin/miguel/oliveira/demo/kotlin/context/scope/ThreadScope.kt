@@ -6,22 +6,17 @@ import org.springframework.beans.factory.config.Scope
 class ThreadScope : Scope {
 
   override fun get(name: String, factory: ObjectFactory<*>): Any {
-    val scope: MutableMap<String, Any> = ThreadScopeContextHolder.currentThreadScopeAttributes()
-      .getBeanMap()
-    // NOTE: Do NOT modify the following to use Map::computeIfAbsent. For details,
-    // see https://github.com/spring-projects/spring-framework/issues/25801.
-    // NOTE: Do NOT modify the following to use Map::computeIfAbsent. For details,
-    // see https://github.com/spring-projects/spring-framework/issues/25801.
-    var scopedObject = scope[name]
+    val threadScopeAttributes = ThreadScopeContextHolder.getThreadScopeAttributes()
+    var scopedObject = threadScopeAttributes.getBean(name)
     if (scopedObject == null) {
       scopedObject = factory.getObject()
-      scope[name] = scopedObject
+      threadScopeAttributes.putBean(name, scopedObject)
     }
     return scopedObject!!
   }
 
   override fun remove(name: String): Any? {
-    return ThreadScopeContextHolder.currentThreadScopeAttributes().getBeanMap().remove(name)
+    return ThreadScopeContextHolder.currentThreadScopeAttributes().removeBean(name)
   }
 
   override fun registerDestructionCallback(name: String, callback: Runnable) {
@@ -29,11 +24,11 @@ class ThreadScope : Scope {
       .registerRequestDestructionCallback(name, callback)
   }
 
-  override fun resolveContextualObject(p0: String): Any? {
+  override fun resolveContextualObject(name: String): Any? {
     return null
   }
 
-  override fun getConversationId(): String? {
+  override fun getConversationId(): String {
     return Thread.currentThread().name
   }
 
