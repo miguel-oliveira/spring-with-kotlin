@@ -14,15 +14,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @EnableCaching
 @EnableAspectJAutoProxy
 @EnableJpaAuditing
-class MySpringDemoKotlinApplication
+class MySpringDemoKotlinApplication {
+
+  @Bean
+  fun customBeanFactoryPostProcessor(): BeanFactoryPostProcessor {
+    return BeanFactoryPostProcessor { beanFactory ->
+      beanFactory.registerScope("thread", ThreadScope())
+    }
+  }
+
+}
 
 fun main(args: Array<String>) {
   runApplication<MySpringDemoKotlinApplication>(*args)
-}
-
-@Bean
-fun customBeanFactoryPostProcessor(): BeanFactoryPostProcessor {
-  return BeanFactoryPostProcessor { beanFactory ->
-    beanFactory.registerScope("thread", ThreadScope())
-  }
 }
