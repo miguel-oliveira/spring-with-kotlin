@@ -1,0 +1,8 @@
+my-app:
+  messaging:
+    consumer-route:
+      "rabbitmq:my-topic?\
+          exchangeType=topic&\
+          durable=false&\
+          autoDelete=true&\
+          routingKey=consumer"
