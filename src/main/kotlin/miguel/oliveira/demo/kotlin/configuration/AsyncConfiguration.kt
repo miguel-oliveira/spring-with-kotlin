@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
 @Configuration
 class AsyncConfiguration : AsyncConfigurer {
 
-  override fun getAsyncExecutor(): Executor? {
+  override fun getAsyncExecutor(): Executor {
     val executor = SimpleAsyncTaskExecutor()
     executor.setTaskDecorator(ThreadScopeTaskDecorator())
     return executor

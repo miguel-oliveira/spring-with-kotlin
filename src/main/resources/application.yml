@@ -2,7 +2,15 @@ my-app:
   messaging:
     consumer-route:
       "rabbitmq:my-topic?\
+        exchangeType=topic&\
+        durable=false&\
+        autoDelete=true&\
+        routingKey=consumer"
+    record:
+      route:
+        "rabbitmq:record?\
           exchangeType=topic&\
+          skipQueueDeclare=true&\
           durable=false&\
-          autoDelete=true&\
-          routingKey=consumer"
+          autoDelete=true"
+      key: record
