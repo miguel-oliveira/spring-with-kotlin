@@ -14,3 +14,10 @@ my-app:
           durable=false&\
           autoDelete=true"
       key: record
+    replay:
+      route:
+        "rabbitmq:replay?\
+          exchangeType=topic&\
+          durable=false&\
+          autoDelete=true&\
+          routingKey=replay"
