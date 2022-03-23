@@ -39,7 +39,7 @@ class ThreadScopeAttributes {
 
   private fun processDestructionCallbacks() {
     for (name: String in destructionCallbacks.keys) {
-      log.debug(
+      log.info(
         "Performing destruction callback for '{}' bean on thread '{}'.",
         name,
         Thread.currentThread().name

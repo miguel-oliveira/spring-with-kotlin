@@ -15,7 +15,7 @@ class RecordingAdvice(private val eventPublisher: ApplicationEventPublisher) {
 
   @AfterReturning("@annotation(miguel.oliveira.demo.kotlin.record.Record)")
   fun record(joinPoint: JoinPoint) {
-    log.debug(
+    log.info(
       "Registering method call with signature {} and args {}", joinPoint.signature, joinPoint.args
     )
     eventPublisher.publishEvent(RecordedMethodCallJoinPoint(joinPoint))

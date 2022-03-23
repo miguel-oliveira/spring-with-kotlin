@@ -31,4 +31,12 @@ class MyEntity(
   @Column(nullable = false)
   val name: String
 
-)
+) {
+
+  companion object {
+    const val NAME = "name"
+    const val CREATED_AT = "createdAt"
+    const val MODIFIED_AT = "modifiedAt"
+  }
+
+}
