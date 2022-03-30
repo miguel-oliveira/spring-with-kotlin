@@ -1,4 +1,4 @@
-package miguel.oliveira.demo.kotlin.rabbitmq
+package miguel.oliveira.demo.kotlin.amqp
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

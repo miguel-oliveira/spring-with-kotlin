@@ -1,4 +1,4 @@
-package miguel.oliveira.demo.kotlin.rabbitmq
+package miguel.oliveira.demo.kotlin.amqp
 
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.model.dataformat.JsonLibrary

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class RabbitConfiguration {
+class AmqpConfiguration {
 
   @Bean
   fun connectionFactory(abstractConnectionFactory: AbstractConnectionFactory): ConnectionFactory {
